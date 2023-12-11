@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Predict Survival</title>
+    <!-- Add Bootstrap CSS link here -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+
+<body>
+
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <!-- <a class="navbar-brand" href="#">Project</a> -->
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="{% url 'data_tab' %}">Data</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'descriptive_statistics_tab' %}">Descriptive Statistics</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'exploratory_data_analysis_tab' %}">Exploratory Data Analysis</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'profile_view' %}" target="_blank">Data Profile</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="{% url 'predict_survival' %}" target="_blank">Predict</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+
+
+
+    <div class="container mt-5">
+        <h2>Predict Survival</h2>
+        <form method="post" action="{% url 'predict_survival' %}" class="mt-4">
+            {% csrf_token %}
+            
+            <!-- Bootstrap Input Form Group for Pclass -->
+            <div class="form-group">
+                <label for="pclass">Pclass:</label>
+                <input type="number" class="form-control" id="pclass" name="pclass" required>
+            </div>
+
+            <!-- Bootstrap Input Form Group for Sex -->
+            <div class="form-group">
+                <label for="sex">Sex:</label>
+                <select class="form-control" id="sex" name="sex" required>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+            </div>
+
+            <!-- Bootstrap Input Form Group for Age -->
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" class="form-control" id="age" name="age" required>
+            </div>
+
+            <!-- Bootstrap Input Form Group for SibSp -->
+            <div class="form-group">
+                <label for="sibsp">SibSp:</label>
+                <input type="number" class="form-control" id="sibsp" name="sibsp" required>
+            </div>
+
+            <!-- Bootstrap Input Form Group for Parch -->
+            <div class="form-group">
+                <label for="parch">Parch:</label>
+                <input type="number" class="form-control" id="parch" name="parch" required>
+            </div>
+
+            <!-- Bootstrap Input Form Group for Fare -->
+            <div class="form-group">
+                <label for="fare">Fare:</label>
+                <input type="number" class="form-control" id="fare" name="fare" required>
+            </div>
+
+            <!-- Bootstrap Input Form Group for Embarked -->
+            <div class="form-group">
+                <label for="embarked">Embarked:</label>
+                <select class="form-control" id="embarked" name="embarked" required>
+                    <option value="embarkeds">Embarked S</option>
+                    <option value="embarkedq">Embarked Q</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Predict</button>
+        </form>
+
+        <!-- Display Prediction Result -->
+        {% if prediction %}
+            <div class="mt-4">
+                <h3>Prediction Result:</h3>
+                <p>The passenger is predicted to {{ prediction }}.</p>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Add Bootstrap JS and Popper.js scripts here -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
